@@ -24,22 +24,11 @@ impl traits::ReadPacket for RtpPacketReader {
 pub struct RtpPacketWriter;
 impl traits::WritePacket for RtpPacketWriter {
     type Packet = RtpPacket;
-   /* fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
+    fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
         packet.write_to(writer)
     }
-        */
-       fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
-            packet.write_to(writer) {
-               Ok(_) => {
-                   println!("Successfully wrote RTP packet.");
-                   Ok(())
-               }
-               Err(e) => {
-                   println!("Failed to write RTP packet: {:?}", e);
-                   Err(e)
-               }
-           }
-       }
+        
+       
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
