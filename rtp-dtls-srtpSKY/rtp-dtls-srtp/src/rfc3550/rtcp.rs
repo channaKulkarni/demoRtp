@@ -62,18 +62,7 @@ impl traits::WritePacket for RtcpPacketWriter {
         Ok(())
     }
 
-    fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
-        println!("Starting to write RTCP compound packet with {} sub-packets.", packet.packets.len());
-
-        for (i, p) in packet.packets.iter().enumerate() {
-            println!("Writing sub-packet {}...", i + 1);
-            track_try!(p.write_to(writer));
-            println!("Successfully wrote sub-packet {}.", i + 1);
-        }
-
-        println!("Finished writing RTCP compound packet.");
-        Ok(())
-    }
+    
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
