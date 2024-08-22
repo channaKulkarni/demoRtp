@@ -28,16 +28,18 @@ impl traits::WritePacket for RtpPacketWriter {
         packet.write_to(writer)
     }
         */
-        match packet.write_to(writer) {
-            Ok(_) => {
-                println!("Successfully wrote RTP packet.");
-                Ok(())
-            }
-            Err(e) => {
-                println!("Failed to write RTP packet: {:?}", e);
-                Err(e)
-            }
-        }
+       fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
+            packet.write_to(writer) {
+               Ok(_) => {
+                   println!("Successfully wrote RTP packet.");
+                   Ok(())
+               }
+               Err(e) => {
+                   println!("Failed to write RTP packet: {:?}", e);
+                   Err(e)
+               }
+           }
+       }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
