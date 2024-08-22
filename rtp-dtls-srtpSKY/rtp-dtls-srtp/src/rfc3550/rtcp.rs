@@ -55,12 +55,12 @@ impl traits::ReadPacket for RtcpPacketReader {
 pub struct RtcpPacketWriter;
 impl traits::WritePacket for RtcpPacketWriter {
     type Packet = RtcpCompoundPacket<RtcpPacket>;
-    /*fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
+    fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
         for p in packet.packets.iter() {
             track_try!(p.write_to(writer));
         }
         Ok(())
-    }*/
+    }
 
     fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
         println!("Starting to write RTCP compound packet with {} sub-packets.", packet.packets.len());
