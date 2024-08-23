@@ -26,7 +26,18 @@ impl traits::WritePacket for RtpPacketWriter {
     type Packet = RtpPacket;
    
     fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
-        packet.write_to(writer)
+       // packet.write_to(writer)
+
+         println!("ChannaRTP :: Writing packet: {:?}", packet);
+
+        // Call write_to and store the result
+        let result = packet.write_to(writer);
+
+        // Print debug information after attempting to write the packet
+        println!("ChannaRTP :: Result of write_to: {:?}", result);
+
+        // Return the result of write_to
+        result
         
     }
 }
