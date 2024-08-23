@@ -201,9 +201,9 @@ where
     pub async fn handshake(stream: S, dtls_builder: D) -> Result<DtlsSrtp<S, D>, io::Error> {
         let (stream_dtls, stream_srtp) = DtlsSrtpMuxer::new(stream).into_parts();
         let dtls = dtls_builder.handshake(stream_dtls).await?;
-        
+        println!("ChannaRTP :: handshake dtls_srtp : {:?}",dtls);
         Ok(DtlsSrtp::new(stream_srtp, dtls))
-        println!("ChannaRTP :: handshake dtls_srtp : {:?},dtls);
+        
     }
 
     fn new(stream: DtlsSrtpMuxerPart<S>, mut dtls: D::Instance) -> Self {
