@@ -24,9 +24,10 @@ impl traits::ReadPacket for RtpPacketReader {
 pub struct RtpPacketWriter;
 impl traits::WritePacket for RtpPacketWriter {
     type Packet = RtpPacket;
+    println!("Adding the logs for rtp packet: {:?}",Packet);
     fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
         packet.write_to(writer);
-        println!("Adding the logs for rtp packet: {:?}",packet);
+        
     }
 }
 
