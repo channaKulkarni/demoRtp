@@ -58,7 +58,7 @@ impl traits::WritePacket for RtcpPacketWriter {
     fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
         for p in packet.packets.iter() {
             track_try!(p.write_to(writer));
-            println!("Packets are recieved: {:?}",p);
+            println!(" ChannaRtp :: Packets are recieved: {:?}",p);
         }
         Ok(())
     }
