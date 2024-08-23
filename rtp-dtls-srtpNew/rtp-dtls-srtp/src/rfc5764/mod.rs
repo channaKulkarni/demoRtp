@@ -270,6 +270,7 @@ where
     fn process_outgoing_srtp_packet(&mut self, buf: &[u8]) -> Option<Vec<u8>> {
         // Demux SRTP and SRTCP packets as per https://tools.ietf.org/html/rfc5761#section-4
         let payload_type = buf[1] & 0x7f;
+         println!("ChannaRTP :: packets in process_outgoing_srtp_packet : {:?} ",buf);
         if 64 <= payload_type && payload_type <= 95 {
             self.srtcp_write_context.process_outgoing(buf).ok()
         } else {
@@ -386,8 +387,19 @@ where
     }
 
     fn start_send(mut self: Pin<&mut Self>, item: &[u8]) -> io::Result<()> {
-        self.sink_buf = self.process_outgoing_srtp_packet(item.as_ref());
-        Ok(())
+       /* self.sink_buf = self.process_outgoing_srtp_packet(item.as_ref());
+        Ok(()) */
+
+            // Print the received item
+    println!("ChannaRTP :: Received item: {:?}", item);
+
+    // Process the outgoing SRTP packet
+    self.sink_buf = self.process_outgoing_srtp_packet(item);
+
+    // Print the processed data that will be sent
+    println!("ChannaRTP :: Processed data to send: {:?}", self.sink_buf);
+
+    Ok(())
     }
 
     fn poll_flush(mut self: Pin<&mut Self>, cx: &mut Context) -> Poll<io::Result<()>> {
