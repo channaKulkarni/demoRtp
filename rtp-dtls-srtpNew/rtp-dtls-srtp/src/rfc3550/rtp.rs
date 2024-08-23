@@ -25,7 +25,7 @@ pub struct RtpPacketWriter;
 impl traits::WritePacket for RtpPacketWriter {
     type Packet = RtpPacket;
    
-    fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<()> {
+    fn write_packet<W: Write>(&mut self, writer: &mut W, packet: &Self::Packet) -> Result<(),...> {
         packet.write_to(writer);
         
     }
