@@ -273,11 +273,12 @@ where
         // Demux SRTP and SRTCP packets as per https://tools.ietf.org/html/rfc5761#section-4
         let payload_type = buf[1] & 0x7f;
          println!("ChannaRTP :: packets in process_outgoing_srtp_packet : {:?} ",buf);
-        if 64 <= payload_type && payload_type <= 95 {
+        self.srtcp_write_context.process_outgoing(buf).ok()
+        /*if 64 <= payload_type && payload_type <= 95 {
             self.srtcp_write_context.process_outgoing(buf).ok()
         } else {
             self.srtp_write_context.process_outgoing(buf).ok()
-        }
+        }*/
     }
 }
 
